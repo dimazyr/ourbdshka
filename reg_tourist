@@ -1,0 +1,49 @@
+<?php
+    header("Content-Type: text/html; charset=utf8");
+    session_start();
+?>
+<html>
+<?php
+
+	mysql_connect ("localhost", "root", "") or die ("Ошибка подключения к базе данных.");
+	mysql_select_db ("mydb") or die ("Ошибка подключения к таблице базы данных.");
+	
+	$_SESSION ['trip_country'] = stripslashes (mysql_real_escape_string($_POST ['trip_country']));
+	$_SESSION ['language'] = stripslashes (mysql_real_escape_string($_POST ['language']));
+	
+	mysql_query ('SET FOREIGN_KEY_CHECKS=0') or die (mysql_error());
+	
+	
+	mysql_query("INSERT INTO login 
+		SET 
+		login='".$_SESSION['login']."', 
+		password='".$_SESSION['password']."',
+		email='".$_SESSION['email']."'") or die (mysql_error ());
+	
+	mysql_query("INSERT INTO add_info
+		SET
+		add_id=last_insert_id()") or die (mysql_error ());
+	
+    mysql_query ("INSERT INTO trip_info 
+		SET
+		trip_country='".$_SESSION['trip_country']."',
+		language='".$_SESSION['language']."'") or die (mysql_error ());
+		
+	mysql_query ("INSERT INTO personal_info  
+		SET 
+		id=last_insert_id(),
+		choice='".$_SESSION['choice']."',
+		name='".$_SESSION['name']."',
+		phone='".$_SESSION['phone']."',
+		country='".$_SESSION['country']."',
+		add_id=last_insert_id(),
+		trip_id=last_insert_id()") or die (mysql_error ());
+	
+	mysql_query ('SET FOREIGN_KEY_CHECKS=1') or die (mysql_error());
+	session_destroy();
+	echo '<script type="text/javascript">
+				alert ("Вы успешно зарегистрированы в системе. Войдите, используя ваши логин и пароль, указанные при регистрации.");
+				document.location.href = "login.php";
+				</script>';
+?>
+</html>
