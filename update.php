@@ -12,22 +12,29 @@
 	<table background="images\manilov.jpg" width="900px" height="910px" align=center>
 		<table>
   	   <?php
-        echo ('    &nbsp;Ваше имя:
+	   
+	    mysql_connect ("localhost", "root", "") or die ("Ошибка подключения к базе данных.");
+		mysql_select_db ("mydb") or die ("Ошибка подключения к таблице базы данных.");
+		$n = mysql_query ("SELECT name,phone,country FROM personal_info WHERE id='".$_SESSION['id']."'");
+		//$p = mysql_query ("SELECT phone FROM personal_info WHERE id='".$_SESSION['id']."'");
+		//$c = mysql_query ("SELECT country FROM personal_info WHERE id='".$_SESSION['id']."'");
+		$k=mysql_fetch_array($n);
+		echo ("    <form action='update2.php' method='post'>
+		       &nbsp;Ваше имя:
 				<br>
-				&nbsp;<input value="$_SESSION['name']" name="name">
+				&nbsp;<input method='post' type='text' value='".$k['name']."' name='name1'>
 				<br><br>
 				&nbsp;Телефон:
 				<br>
-				&nbsp;<input value="$_SESSION['phone']" name="phone">
+				&nbsp;+7<input method='post' value='".$k['phone']."' name='phone1'>
 				<br><br>
 				&nbsp;Страна:
 				<br>
-				&nbsp;<input value="$_SESSION['country']" name="country">   
-				');
+				&nbsp;<input method='post' value='".$k['country']."' name='country1'>   
+					<button>Подтвердить изменения</button>
+					</form>");
 				
-				mysql_query("UPDATE personal_info(name,phone,country) FROM personal_info SET name='".$_POST['name']."', phone='".$_POST['phone']."',country='".$_POST['country']."'  ")
-				
-        }         
+               
     		
     ?>
                 </table> 
