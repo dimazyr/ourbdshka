@@ -1,0 +1,53 @@
+<?php
+    header("Content-Type: text/html; charset=utf8");
+    
+?>
+
+<html>
+	<head>
+	<meta content="html/text; charset=utf-8">
+	<link href="style.css" rel="stylesheet"/>
+		<title>
+			Ввод личных данных
+		</title>
+	</head>
+	<body background="images\reg.jpg">
+		<div class="container">
+			<div class="box">
+				<div>
+					<form action="index.php">
+						<button><font size=+3>На главную</font></button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div id="window_pers_reg">
+			<div id="header">
+				<h1>Заполните ваши личные данные</h1>
+			</div>
+			<div id="input_pers_reg">
+				<form action="end_of_reg.php" method="post">
+				&nbsp;&nbsp;Фамилия, имя и отчество:<br>
+				&nbsp;<input size=20 maxlength=20 value="" name="name">
+				<br><br>
+				&nbsp;&nbsp;Контактный номер телефона:<br>
+				&nbsp;<input size=20 maxlength=20 value="" name="phone">
+				<br><br>
+				&nbsp;&nbsp;Что вы хотите делать? 
+				&nbsp;<br>
+					&nbsp;<select name="choice">
+						&nbsp;<option value="1">Я хочу принимать гостей</option>
+						&nbsp;<option value="2">Я ищу место где остановиться</option>
+					</select>	
+				<br><br>
+				&nbsp;&nbsp;Ваша страна:
+				<br> 
+				&nbsp;<input size=20 maxlength=20 name="country">
+				<br><br>
+				&nbsp;<input type="submit" value="Завершить регистрацию" name="submit1">&nbsp;
+				</form>
+			</div>
+		</div>
+	</body>
+
+</html>
